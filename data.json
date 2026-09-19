@@ -1,7 +1,7 @@
 {
   "trino": {
     "users": {
-      "bob": {
+      "infotelica_hkaya": {
         "base_operations": [
           "ExecuteQuery",
           "ExecuteProcedure"
@@ -95,7 +95,7 @@
           }
         ]
       },
-      "mark": {
+      "infotelica_hodogan": {
         "base_operations": [
           "ExecuteQuery",
           "ExecuteProcedure"
@@ -331,7 +331,7 @@
           }
         ]
       },
-      "alice": {
+      "infotelica_eirmak": {
         "base_operations": [
           "ExecuteQuery",
           "ExecuteProcedure"
@@ -474,7 +474,7 @@
           }
         ]
       },
-      "eve": {
+      "infotelica_dkaya": {
         "base_operations": [
           "ExecuteQuery"
         ],
@@ -607,7 +607,7 @@
           }
         ]
       },
-      "adm": {
+      "infotelika_msaltan": {
         "base_operations": [
           "ExecuteQuery",
           "ExecuteProcedure"
