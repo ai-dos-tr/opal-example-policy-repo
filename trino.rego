@@ -126,3 +126,32 @@ allow if {
 	operation == "FilterColumns"
 	table_operation(resource.column.catalogName, resource.column.schemaName, resource.column.tableName, "ShowColumns")
 }
+
+# JDBC clients such as DBeaver and DataGrip read metadata through the built-in
+# system catalog (system.jdbc and system.metadata). Allow read-only access to
+# those two schemas for any user who can run queries. Rows are still filtered
+# per user by the Filter* rules above. system.runtime stays denied because it
+# exposes other users' queries.
+system_metadata_schemas := {"jdbc", "metadata"}
+
+can_query if "ExecuteQuery" in permissions.base_operations
+
+allow if {
+	operation in ["AccessCatalog", "ShowSchemas", "FilterCatalogs"]
+	resource.catalog.name == "system"
+	can_query
+}
+
+allow if {
+	operation in ["ShowTables", "FilterSchemas"]
+	resource.schema.catalogName == "system"
+	resource.schema.schemaName in system_metadata_schemas
+	can_query
+}
+
+allow if {
+	operation in ["SelectFromColumns", "ShowColumns", "FilterTables", "FilterColumns"]
+	resource.table.catalogName == "system"
+	resource.table.schemaName in system_metadata_schemas
+	can_query
+}
